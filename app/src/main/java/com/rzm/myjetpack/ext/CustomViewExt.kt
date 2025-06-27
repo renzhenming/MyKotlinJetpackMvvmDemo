@@ -1,6 +1,7 @@
 package com.rzm.myjetpack.ext
 
 import android.app.Activity
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import android.widget.LinearLayout
@@ -8,19 +9,24 @@ import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.chad.library.adapter.base.BaseQuickAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
 import com.kingja.loadsir.core.LoadService
+import com.kingja.loadsir.core.LoadSir
 import com.rzm.myjetpack.appContext
+import com.rzm.myjetpack.ui.widget.callback.LoadingCallback
 import com.rzm.myjetpack.ui.main.me.MeFragment
 import com.rzm.myjetpack.ui.main.publicnum.PublicNumberFragment
 import com.rzm.myjetpack.ui.main.home.HomeFragment
 import com.rzm.myjetpack.ui.main.project.ProjectFragment
 import com.rzm.myjetpack.ui.main.tree.TreeArrFragment
 import com.rzm.myjetpack.utils.SettingUtil
+import com.yanzhenjie.recyclerview.SwipeRecyclerView
 
 
 /**
@@ -99,6 +105,51 @@ fun BottomNavigationViewEx.init(navigationItemSelectedAction: (Int) -> Unit): Bo
         true
     }
     return this
+}
+
+fun initLoadState(view: View, callback: () -> Unit): LoadService<Any> {
+    val loadState = LoadSir.getDefault().register(view) {
+        callback.invoke()
+    }
+    loadState.showSuccess()
+    SettingUtil.setLoadingColor(SettingUtil.getColor(appContext), loadState)
+    return loadState
+}
+
+fun LoadService<*>.showLoading() {
+    this.showCallback(LoadingCallback::class.java)
+}
+
+/**
+ * 初始化普通的toolbar 只设置标题
+ */
+fun Toolbar.init(titleStr: String = ""): Toolbar {
+    setBackgroundColor(SettingUtil.getColor(appContext))
+    title = titleStr
+    return this
+}
+
+//绑定SwipeRecyclerView
+fun SwipeRecyclerView.init(
+    manager: RecyclerView.LayoutManager,
+    bindAdapter: RecyclerView.Adapter<*>,
+    isScroll: Boolean = true
+): SwipeRecyclerView {
+    layoutManager = manager
+    setHasFixedSize(true)
+    adapter = bindAdapter
+    isNestedScrollingEnabled = isScroll
+    return this
+}
+
+//设置适配器的列表动画
+fun BaseQuickAdapter<*, *>.setAdapterAnimation(mode: Int) {
+    if (mode == 0) {
+        this.animationEnable = false
+    } else {
+        this.animationEnable = true
+        this.setAnimationWithDefault(BaseQuickAdapter.AnimationType.values()[mode - 1])
+    }
 }
 
 

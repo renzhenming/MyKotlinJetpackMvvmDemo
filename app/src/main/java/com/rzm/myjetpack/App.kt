@@ -5,8 +5,13 @@ import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
+import com.kingja.loadsir.callback.SuccessCallback
+import com.kingja.loadsir.core.LoadSir
 import com.rzm.myjetpack.app.event.AppViewModel
 import com.rzm.myjetpack.app.event.EventViewModel
+import com.rzm.myjetpack.ui.widget.callback.EmptyCallback
+import com.rzm.myjetpack.ui.widget.callback.ErrorCallback
+import com.rzm.myjetpack.ui.widget.callback.LoadingCallback
 import com.tencent.mmkv.MMKV
 
 //Application全局的ViewModel，里面存放了一些账户信息，基本配置信息等
@@ -35,6 +40,13 @@ class App : Application(), ViewModelStoreOwner {
         mAppViewModelStore = ViewModelStore()
         appViewModelInstance = getAppViewModelProvider().get(AppViewModel::class.java)
         appEventViewModelInstance = getAppViewModelProvider().get(EventViewModel::class.java)
+        //界面加载管理 初始化
+        LoadSir.beginBuilder()
+            .addCallback(LoadingCallback())//加载
+            .addCallback(ErrorCallback())//错误
+            .addCallback(EmptyCallback())//空
+            .setDefaultCallback(SuccessCallback::class.java)//设置默认加载状态页
+            .commit()
     }
 
     private fun getAppViewModelProvider(): ViewModelProvider {

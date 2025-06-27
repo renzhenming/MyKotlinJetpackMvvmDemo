@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.StateListDrawable
-import android.os.Build
 import android.preference.PreferenceManager
 import android.view.View
 import android.widget.ProgressBar
@@ -14,6 +13,7 @@ import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.Utils
 import com.kingja.loadsir.core.LoadService
 import com.rzm.myjetpack.R
+import com.rzm.myjetpack.ui.widget.callback.LoadingCallback
 import com.tencent.mmkv.MMKV
 import java.lang.reflect.InvocationTargetException
 import kotlin.math.roundToInt
@@ -60,6 +60,7 @@ object SettingUtil {
         val kv = MMKV.mmkvWithID("app")
         kv.encode("mode", mode)
     }
+
     /**
      * 获取是否请求置顶文章
      */
@@ -69,12 +70,14 @@ object SettingUtil {
     }
 
     fun getColorStateList(context: Context): ColorStateList {
-        val colors = intArrayOf(getColor(context), ContextCompat.getColor(context, R.color.colorGray))
+        val colors =
+            intArrayOf(getColor(context), ContextCompat.getColor(context, R.color.colorGray))
         val states = arrayOfNulls<IntArray>(2)
         states[0] = intArrayOf(android.R.attr.state_checked, android.R.attr.state_checked)
         states[1] = intArrayOf()
         return ColorStateList(states, colors)
     }
+
     fun getColorStateList(color: Int): ColorStateList {
         val colors = intArrayOf(color, ContextCompat.getColor(Utils.getApp(), R.color.colorGray))
         val states = arrayOfNulls<IntArray>(2)
@@ -128,18 +131,30 @@ object SettingUtil {
         val mySelectorGrad = view.background as StateListDrawable
         try {
             val slDraClass = StateListDrawable::class.java
-            val getStateCountMethod = slDraClass.getDeclaredMethod("getStateCount", *arrayOfNulls(0))
-            val getStateSetMethod = slDraClass.getDeclaredMethod("getStateSet", Int::class.javaPrimitiveType)
-            val getDrawableMethod = slDraClass.getDeclaredMethod("getStateDrawable", Int::class.javaPrimitiveType)
+            val getStateCountMethod =
+                slDraClass.getDeclaredMethod("getStateCount", *arrayOfNulls(0))
+            val getStateSetMethod =
+                slDraClass.getDeclaredMethod("getStateSet", Int::class.javaPrimitiveType)
+            val getDrawableMethod =
+                slDraClass.getDeclaredMethod("getStateDrawable", Int::class.javaPrimitiveType)
             val count = getStateCountMethod.invoke(mySelectorGrad) as Int//对应item标签
             for (i in 0 until count) {
-                val stateSet = getStateSetMethod.invoke(mySelectorGrad, i) as IntArray//对应item标签中的 android:state_xxxx
+                val stateSet = getStateSetMethod.invoke(
+                    mySelectorGrad,
+                    i
+                ) as IntArray//对应item标签中的 android:state_xxxx
                 if (stateSet.isEmpty()) {
-                    val drawable = getDrawableMethod.invoke(mySelectorGrad, i) as GradientDrawable//这就是你要获得的Enabled为false时候的drawable
+                    val drawable = getDrawableMethod.invoke(
+                        mySelectorGrad,
+                        i
+                    ) as GradientDrawable//这就是你要获得的Enabled为false时候的drawable
                     drawable.setColor(yesColor)
                 } else {
                     for (j in stateSet.indices) {
-                        val drawable = getDrawableMethod.invoke(mySelectorGrad, i) as GradientDrawable//这就是你要获得的Enabled为false时候的drawable
+                        val drawable = getDrawableMethod.invoke(
+                            mySelectorGrad,
+                            i
+                        ) as GradientDrawable//这就是你要获得的Enabled为false时候的drawable
                         drawable.setColor(noColor)
                     }
                 }
@@ -171,13 +186,13 @@ object SettingUtil {
     /**
      * 设置loading的颜色 加载布局
      */
-    fun setLoadingColor(color:Int,loadsir: LoadService<Any>) {
-//        loadsir.setCallBack(LoadingCallback::class.java) { _, view ->
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                view.findViewById<ProgressBar>(R.id.loading_progress).indeterminateTintMode = PorterDuff.Mode.SRC_ATOP
-//                view.findViewById<ProgressBar>(R.id.loading_progress).indeterminateTintList = getOneColorStateList(color)
-//            }
-//        }
+    fun setLoadingColor(color: Int, loadsir: LoadService<Any>) {
+        loadsir.setCallBack(LoadingCallback::class.java) { _, view ->
+            view.findViewById<ProgressBar>(R.id.loading_progress).indeterminateTintMode =
+                PorterDuff.Mode.SRC_ATOP
+            view.findViewById<ProgressBar>(R.id.loading_progress).indeterminateTintList =
+                getOneColorStateList(color)
+        }
     }
 
 
