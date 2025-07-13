@@ -37,7 +37,6 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
-<!--        app:destination="@id/integralFragment"-->
         <action
             android:id="@+id/action_mainfragment_to_collectFragment"
             app:destination="@id/collectFragment"
@@ -75,94 +74,23 @@
             app:popExitAnim="@anim/slide_out_right" />
 
     </fragment>
-
-
-<!--    <fragment-->
-<!--        android:id="@+id/loginFragment"-->
-<!--        android:name="me.hgj.jetpackmvvm.demo.ui.fragment.login.LoginFragment"-->
-<!--        android:label="LoginFragment">-->
-<!--        <action-->
-<!--            android:id="@+id/action_loginFragment_to_registerFrgment"-->
-<!--            app:destination="@id/registerFrgment"-->
-<!--            app:enterAnim="@anim/slide_in_right"-->
-<!--            app:exitAnim="@anim/slide_out_left"-->
-<!--            app:popEnterAnim="@anim/slide_in_left"-->
-<!--            app:popExitAnim="@anim/slide_out_right" />-->
-<!--    </fragment>-->
-<!--    <fragment-->
-<!--        android:id="@+id/registerFrgment"-->
-<!--        android:name="me.hgj.jetpackmvvm.demo.ui.fragment.login.RegisterFrgment"-->
-<!--        android:label="RegisterFrgment">-->
-
-<!--        <action-->
-<!--            android:id="@+id/action_registerFrgment_to_mainFragment"-->
-<!--            app:enterAnim="@anim/slide_in_right"-->
-<!--            app:exitAnim="@anim/slide_out_left"-->
-<!--            app:popEnterAnim="@anim/slide_in_left"-->
-<!--            app:popExitAnim="@anim/slide_out_right"-->
-<!--            app:popUpTo="@id/mainfragment" />-->
-
-<!--        <action-->
-<!--            android:id="@+id/action_registerFrgment_to_loginFragment"-->
-<!--            app:enterAnim="@anim/slide_in_right"-->
-<!--            app:exitAnim="@anim/slide_out_left"-->
-<!--            app:popEnterAnim="@anim/slide_in_left"-->
-<!--            app:popExitAnim="@anim/slide_out_right"-->
-<!--            app:popUpTo="@id/loginFragment" />-->
-
-<!--        <action-->
-<!--            android:id="@+id/action_registerFrgment_to_searchResultFragment"-->
-<!--            app:enterAnim="@anim/slide_in_right"-->
-<!--            app:exitAnim="@anim/slide_out_left"-->
-<!--            app:popEnterAnim="@anim/slide_in_left"-->
-<!--            app:popExitAnim="@anim/slide_out_right"-->
-<!--            app:popUpTo="@id/searchResultFragment" />-->
-
-
-<!--    </fragment>-->
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.rzm.myjetpack.ui.main.sub.search.SearchFragment"
         android:label="SearchFragment">
-<!--        <action-->
-<!--            android:id="@+id/action_searchFragment_to_searchResultFragment"-->
-<!--            app:destination="@id/searchResultFragment"-->
-<!--            app:enterAnim="@anim/slide_in_right"-->
-<!--            app:exitAnim="@anim/slide_out_left"-->
-<!--            app:popEnterAnim="@anim/slide_in_left"-->
-<!--            app:popExitAnim="@anim/slide_out_right" />-->
+
     </fragment>
-<!--    <fragment-->
-<!--        android:id="@+id/searchResultFragment"-->
-<!--        android:name="me.hgj.jetpackmvvm.demo.ui.fragment.search.SearchResultFragment"-->
-<!--        android:label="SearchResultFragment"-->
-<!--        app:startDestination="@id/action_searchResultFragment_to_lookInfoFragment">-->
-<!--        <action-->
-<!--            android:id="@+id/action_searchResultFragment_to_lookInfoFragment"-->
-<!--            app:destination="@id/lookInfoFragment"-->
-<!--            app:enterAnim="@anim/slide_in_right"-->
-<!--            app:exitAnim="@anim/slide_out_left"-->
-<!--            app:popEnterAnim="@anim/slide_in_left"-->
-<!--            app:popExitAnim="@anim/slide_out_right" />-->
-<!--    </fragment>-->
-<!--    <fragment-->
-<!--        android:id="@+id/webFragment"-->
-<!--        android:name="me.hgj.jetpackmvvm.demo.ui.fragment.web.WebFragment"-->
-<!--        android:label="WebFragment" />-->
+
+    <fragment
+        android:id="@+id/webFragment"
+        android:name="com.rzm.myjetpack.ui.main.web.WebFragment"
+        android:label="WebFragment" />
 
     <fragment
         android:id="@+id/systemArrFragment"
         android:name="com.rzm.myjetpack.ui.main.sub.systemarr.SystemArrFragment"
-        android:label="SystemArrFragment"
-        >
-<!--        app:destination="@id/loginFragment"-->
-<!--        <action-->
-<!--            android:id="@+id/action_systemArrFragment_to_lookInfoFragment"-->
-<!--            app:destination="@id/lookInfoFragment"-->
-<!--            app:enterAnim="@anim/slide_in_right"-->
-<!--            app:exitAnim="@anim/slide_out_left"-->
-<!--            app:popEnterAnim="@anim/slide_in_left"-->
-<!--            app:popExitAnim="@anim/slide_out_right" />-->
+        android:label="SystemArrFragment">
+
     </fragment>
     <fragment
         android:id="@+id/lookInfoFragment"
@@ -172,18 +100,8 @@
         android:id="@+id/integralFragment"
         android:name="com.rzm.myjetpack.ui.main.sub.integral.IntegralFragment"
         android:label="IntegralFragment">
-<!--        <action-->
-<!--            android:id="@+id/action_integralFragment_to_integralHistoryFragment"-->
-<!--            app:destination="@id/integralHistoryFragment"-->
-<!--            app:enterAnim="@anim/slide_in_right"-->
-<!--            app:exitAnim="@anim/slide_out_left"-->
-<!--            app:popEnterAnim="@anim/slide_in_left"-->
-<!--            app:popExitAnim="@anim/slide_out_right" />-->
+
     </fragment>
-<!--    <fragment-->
-<!--        android:id="@+id/integralHistoryFragment"-->
-<!--        android:name="me.hgj.jetpackmvvm.demo.ui.fragment.integral.IntegralHistoryFragment"-->
-<!--        android:label="IntegralHistoryFragment" />-->
 
     <fragment
         android:id="@+id/collectFragment"
@@ -210,36 +128,46 @@
         android:id="@+id/todoListFragment"
         android:name="com.rzm.myjetpack.ui.main.sub.todolist.TodoListFragment"
         android:label="TodoListFragment">
-<!--        <action-->
-<!--            android:id="@+id/action_todoListFragment_to_addTodoFragment"-->
-<!--            app:destination="@id/addTodoFragment"-->
-<!--            app:enterAnim="@anim/slide_in_right"-->
-<!--            app:exitAnim="@anim/slide_out_left"-->
-<!--            app:popEnterAnim="@anim/slide_in_left"-->
-<!--            app:popExitAnim="@anim/slide_out_right" />-->
-    </fragment>
-<!--    <fragment-->
-<!--        android:id="@+id/addTodoFragment"-->
-<!--        android:name="me.hgj.jetpackmvvm.demo.ui.fragment.todo.AddTodoFragment"-->
-<!--        android:label="AddTodoFragment" />-->
 
-<!--    <action-->
-<!--        android:id="@+id/action_to_webFragment"-->
-<!--        app:destination="@id/webFragment"-->
-<!--        app:enterAnim="@anim/slide_in_right"-->
-<!--        app:exitAnim="@anim/slide_out_left"-->
-<!--        app:popEnterAnim="@anim/slide_in_left"-->
-<!--        app:popExitAnim="@anim/slide_out_right" />-->
-<!--    <action-->
-<!--        android:id="@+id/action_to_loginFragment"-->
-<!--        app:destination="@id/loginFragment"-->
-<!--        app:enterAnim="@anim/slide_in_right"-->
-<!--        app:exitAnim="@anim/slide_out_left"-->
-<!--        app:popEnterAnim="@anim/slide_in_left"-->
-<!--        app:popExitAnim="@anim/slide_out_right" />-->
+    </fragment>
+
+    <action
+        android:id="@+id/action_to_webFragment"
+        app:destination="@id/webFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.rzm.myjetpack.ui.main.sub.setting.SettingFragment"
         android:label="SettingFragment" />
 
+    <action
+        android:id="@+id/action_to_loginFragment"
+        app:destination="@id/loginFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.rzm.myjetpack.ui.main.login.LoginFragment"
+        android:label="LoginFragment">
+        <action
+            android:id="@+id/action_loginFragment_to_registerFrgment"
+            app:destination="@id/registerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.rzm.myjetpack.ui.main.login.RegisterFragment"
+        android:label="RegisterFragment">
+
+    </fragment>
 </navigation>

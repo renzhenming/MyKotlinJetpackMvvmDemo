@@ -18,8 +18,8 @@ import com.rzm.jetpackmvvm.base.viewmodel.AbstractViewModel
 
 abstract class AbstractMvvmFragment<VM : AbstractViewModel> : Fragment() {
 
-    private lateinit var mActivity: AppCompatActivity
-    private lateinit var mViewModel: VM
+    lateinit var mActivity: AppCompatActivity
+    lateinit var mViewModel: VM
     private val mHandler = Handler(Looper.getMainLooper())
     private var isFirst: Boolean = true
 

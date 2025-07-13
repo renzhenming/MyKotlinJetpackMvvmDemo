@@ -13,6 +13,7 @@ import com.rzm.myjetpack.databinding.FragmentHomeBinding
 import com.rzm.myjetpack.ext.*
 import com.rzm.myjetpack.ui.main.home.adater.ArticleAdapter
 import com.rzm.myjetpack.ui.main.home.viewmodel.HomeViewModel
+import com.rzm.myjetpack.ui.main.web.WebFragment
 import com.rzm.myjetpack.ui.widget.recyclerview.MyLoadMoreView
 import com.rzm.myjetpack.ui.widget.recyclerview.SpaceItemDecoration
 import com.yanzhenjie.recyclerview.SwipeRecyclerView
@@ -53,8 +54,14 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     private fun initAdapter() {
         articleAdapter.run {
-            setOnItemClickListener { _, _, _ ->
-
+            setOnItemClickListener { _, _, position ->
+                findNavController().navigate(R.id.action_to_webFragment, Bundle().apply {
+                    putParcelable(
+                        WebFragment.PARAMS_URL,
+                        articleAdapter.data[position - this@HomeFragment.binding
+                            .includeList.includeRecyclerview.recyclerView.headerCount]
+                    )
+                })
             }
             addChildClickViewIds(R.id.item_home_author, R.id.item_project_author)
             setOnItemChildClickListener { _, view, position ->

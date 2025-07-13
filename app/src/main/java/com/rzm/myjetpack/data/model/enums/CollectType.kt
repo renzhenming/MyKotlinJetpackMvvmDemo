@@ -1,9 +1,7 @@
-package me.hgj.jetpackmvvm.demo.data.model.enums
+package com.rzm.myjetpack.data.model.enums
 
 
 enum class CollectType(val type: Int) {
-    // 0.文章
-    Ariticle(0),
-    //1.网址
+    Article(0),
     Url(1)
 }
