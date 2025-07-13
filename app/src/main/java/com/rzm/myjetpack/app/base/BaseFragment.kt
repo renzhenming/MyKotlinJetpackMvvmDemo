@@ -42,11 +42,9 @@ abstract class BaseFragment<VM : AbstractViewModel, DB : ViewDataBinding> :
         hideSoftKeyboard(activity)
     }
 
-    override fun dismissLoadingDialog() {
-        dismissLoadingDialog()
+    override fun showLoadingDialog(it: String) {
     }
 
-    override fun showLoadingDialog(it: String) {
-        showLoadingDialog(it)
+    override fun dismissLoadingDialog() {
     }
 }

@@ -13,11 +13,6 @@ import androidx.navigation.Navigator
 import androidx.navigation.fragment.FragmentNavigator
 import java.util.*
 
-/**
- * 作者　: hegaojian
- * 时间　: 2021/6/29
- * 描述　: 使用Hide/Show处理Fragment，使Fragment执行 onPause/onResume.避免页面重建.
- */
 @Navigator.Name("fragment")
 class MyFragmentNavigator(
     private val mContext: Context,

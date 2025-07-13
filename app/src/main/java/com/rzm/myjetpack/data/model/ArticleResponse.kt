@@ -1,8 +1,13 @@
-package com.rzm.myjetpack.ui.main.home.bean
+package com.rzm.myjetpack.data.model
 
+import android.annotation.SuppressLint
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * 文章
+ */
+@SuppressLint("ParcelCreator")
 @Parcelize
 data class ArticleResponse(
     var apkLink: String,
@@ -29,5 +34,4 @@ data class ArticleResponse(
     var type: Int,
     var userId: Int,
     var visible: Int,
-    var zan: Int
-) : Parcelable
+    var zan: Int) : Parcelable

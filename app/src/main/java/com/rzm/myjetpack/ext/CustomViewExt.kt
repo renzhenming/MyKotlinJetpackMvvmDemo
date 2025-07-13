@@ -116,31 +116,6 @@ fun initLoadState(view: View, callback: () -> Unit): LoadService<Any> {
     return loadState
 }
 
-fun LoadService<*>.showLoading() {
-    this.showCallback(LoadingCallback::class.java)
-}
-
-/**
- * 初始化普通的toolbar 只设置标题
- */
-fun Toolbar.init(titleStr: String = ""): Toolbar {
-    setBackgroundColor(SettingUtil.getColor(appContext))
-    title = titleStr
-    return this
-}
-
-//绑定SwipeRecyclerView
-fun SwipeRecyclerView.init(
-    manager: RecyclerView.LayoutManager,
-    bindAdapter: RecyclerView.Adapter<*>,
-    isScroll: Boolean = true
-): SwipeRecyclerView {
-    layoutManager = manager
-    setHasFixedSize(true)
-    adapter = bindAdapter
-    isNestedScrollingEnabled = isScroll
-    return this
-}
 
 //设置适配器的列表动画
 fun BaseQuickAdapter<*, *>.setAdapterAnimation(mode: Int) {
