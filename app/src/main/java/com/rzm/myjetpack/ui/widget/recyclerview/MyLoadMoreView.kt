@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.ProgressBar
 import android.widget.LinearLayout
-import com.blankj.utilcode.util.ConvertUtils
 import com.rzm.myjetpack.R
 import com.rzm.myjetpack.utils.SettingUtil
 
@@ -32,7 +31,7 @@ class MyLoadMoreView(context: Context) : LinearLayout(context), SwipeRecyclerVie
         layoutParams = ViewGroup.LayoutParams(-1, -2)
         gravity = Gravity.CENTER
         visibility = View.GONE
-        val minHeight = ConvertUtils.dp2px(36f)
+        val minHeight = 72
         minimumHeight = minHeight
         View.inflate(context, R.layout.layout_fotter_loadmore, this)
         mProgressBar = findViewById(R.id.loading_view)

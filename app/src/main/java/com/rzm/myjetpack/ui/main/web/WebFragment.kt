@@ -8,7 +8,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
-import com.blankj.utilcode.util.VibrateUtils
 import com.just.agentweb.AgentWeb
 import com.rzm.myjetpack.R
 import com.rzm.myjetpack.app.base.BaseFragment
@@ -92,7 +91,6 @@ class WebFragment : BaseFragment<WebViewModel, FragmentWebBinding>() {
     }
 
     private fun collectWeb() {
-        VibrateUtils.vibrate(40)
         if (!CacheUtil.isLogin()) {
             findNavController().navigate(R.id.action_to_loginFragment)
             return

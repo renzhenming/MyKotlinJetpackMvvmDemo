@@ -5,7 +5,6 @@ import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.blankj.utilcode.util.ConvertUtils
 import com.kingja.loadsir.core.LoadService
 import com.rzm.myjetpack.R
 import com.rzm.myjetpack.app.base.BaseFragment
@@ -40,7 +39,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             LinearLayoutManager(context),
             articleAdapter
         ).let {
-            it.addItemDecoration(SpaceItemDecoration(0, ConvertUtils.dp2px(8f), false))
+            it.addItemDecoration(SpaceItemDecoration(0, 20, false))
             footView = it.initFooter(SwipeRecyclerView.LoadMoreListener {
                 requestHomeViewModel.getHomeData(false)
             })

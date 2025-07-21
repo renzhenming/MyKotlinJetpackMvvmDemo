@@ -35,4 +35,18 @@
     <string name="share">分享</string>
     <string name="refresh">刷新</string>
     <string name="open_by_browser">用浏览器打开</string>
+    <string name="password">密码</string>
+    <string name="login">登录</string>
+    <string name="go_register">去注册</string>
+    <string name="account">账号</string>
+    <string name="tips">温馨提示</string>
+    <string name="confirm_password">确认密码</string>
+    <string name="register_then_login">注册并登录</string>
+    <string name="register">注册</string>
+    <string name="register_success">注册成功</string>
+    <string name="ok">ok</string>
+    <string name="loading">加载中...</string>
+    <string name="toast_not_init">ToastManager 未初始化</string>
+    <string name="username_cannot_be_empty">用户名不能为空</string>
+    <string name="password_cannot_be_empty">密码不能为空</string>
 </resources>

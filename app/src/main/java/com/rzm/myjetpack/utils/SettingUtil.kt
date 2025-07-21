@@ -10,9 +10,9 @@ import android.preference.PreferenceManager
 import android.view.View
 import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
-import com.blankj.utilcode.util.Utils
 import com.kingja.loadsir.core.LoadService
 import com.rzm.myjetpack.R
+import com.rzm.myjetpack.appContext
 import com.rzm.myjetpack.ui.widget.callback.LoadingCallback
 import com.tencent.mmkv.MMKV
 import java.lang.reflect.InvocationTargetException
@@ -79,7 +79,7 @@ object SettingUtil {
     }
 
     fun getColorStateList(color: Int): ColorStateList {
-        val colors = intArrayOf(color, ContextCompat.getColor(Utils.getApp(), R.color.colorGray))
+        val colors = intArrayOf(color, ContextCompat.getColor(appContext, R.color.colorGray))
         val states = arrayOfNulls<IntArray>(2)
         states[0] = intArrayOf(android.R.attr.state_checked, android.R.attr.state_checked)
         states[1] = intArrayOf()

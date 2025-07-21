@@ -12,6 +12,7 @@ import com.rzm.myjetpack.app.event.EventViewModel
 import com.rzm.myjetpack.ui.widget.callback.EmptyCallback
 import com.rzm.myjetpack.ui.widget.callback.ErrorCallback
 import com.rzm.myjetpack.ui.widget.callback.LoadingCallback
+import com.rzm.myjetpack.utils.ToastManager
 import com.tencent.mmkv.MMKV
 
 //Application全局的ViewModel，里面存放了一些账户信息，基本配置信息等
@@ -36,10 +37,11 @@ class App : Application(), ViewModelStoreOwner {
     override fun onCreate() {
         super.onCreate()
         instance = this
+        ToastManager.init(this)
         MMKV.initialize(this.filesDir.absolutePath + "/mmkv")
         mAppViewModelStore = ViewModelStore()
-        appViewModelInstance = getAppViewModelProvider().get(AppViewModel::class.java)
-        appEventViewModelInstance = getAppViewModelProvider().get(EventViewModel::class.java)
+        appViewModelInstance = getAppViewModelProvider()[AppViewModel::class.java]
+        appEventViewModelInstance = getAppViewModelProvider()[EventViewModel::class.java]
         //界面加载管理 初始化
         LoadSir.beginBuilder()
             .addCallback(LoadingCallback())//加载
