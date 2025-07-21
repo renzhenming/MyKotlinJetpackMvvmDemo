@@ -1,11 +1,43 @@
 package com.rzm.myjetpack.ui.main.web.viewmodel
 
+import androidx.lifecycle.MutableLiveData
+import com.rzm.jetpackmvvm.base.ext.request
+import com.rzm.jetpackmvvm.base.state.CollectState
 import com.rzm.myjetpack.app.base.BaseViewModel
+import com.rzm.myjetpack.app.network.apiService
 
 class WebViewModel : BaseViewModel() {
 
+    val collectState = MutableLiveData<CollectState>()
+
+    fun collect(articleId: Int) {
+        request({ apiService.collect(articleId) }, {
+            collectState.value = CollectState(isSuccess = true, collected = true, id = articleId)
+        }, {
+            collectState.value = CollectState(
+                isSuccess = false,
+                collected = false,
+                id = articleId,
+                errorMsg = it.errorMsg
+            )
+        })
+    }
+
+    fun unCollect(articleId: Int) {
+        request({ apiService.uncollect(articleId)},{
+            collectState.value = CollectState(isSuccess = true, collected = false, id = articleId)
+        },{
+            collectState.value = CollectState(
+                isSuccess = false,
+                collected = true,
+                id = articleId,
+                errorMsg = it.errorMsg
+            )
+        })
+    }
+
     //是否收藏
-    var collect = false
+    var collected = false
 
     //收藏的Id
     var articleId = 0

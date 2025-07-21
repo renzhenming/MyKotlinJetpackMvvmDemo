@@ -6,22 +6,25 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.Window
 import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
 import com.just.agentweb.AgentWeb
 import com.rzm.myjetpack.R
 import com.rzm.myjetpack.app.base.BaseFragment
 import com.rzm.myjetpack.data.model.ArticleResponse
+import com.rzm.myjetpack.data.model.enums.CollectType
+import com.rzm.myjetpack.data.model.event.CollectEvent
 import com.rzm.myjetpack.databinding.FragmentWebBinding
+import com.rzm.myjetpack.eventViewModel
 import com.rzm.myjetpack.ext.findNavController
 import com.rzm.myjetpack.ext.hideSoftKeyboard
 import com.rzm.myjetpack.ext.initClose
+import com.rzm.myjetpack.ext.showAlertDialog
 import com.rzm.myjetpack.ui.main.web.viewmodel.WebViewModel
-
+import com.rzm.myjetpack.utils.CacheUtil
 import kotlinx.android.synthetic.main.fragment_web.*
 import kotlinx.android.synthetic.main.include_toolbar.view.*
-import com.rzm.myjetpack.data.model.enums.CollectType
-import com.rzm.myjetpack.utils.CacheUtil
 
 class WebFragment : BaseFragment<WebViewModel, FragmentWebBinding>() {
 
@@ -38,7 +41,7 @@ class WebFragment : BaseFragment<WebViewModel, FragmentWebBinding>() {
             getParcelable<ArticleResponse>(PARAMS_URL)?.let {
                 mViewModel.articleId = it.id
                 mViewModel.showTitle = it.title
-                mViewModel.collect = it.collect
+                mViewModel.collected = it.collect
                 mViewModel.url = it.link
                 mViewModel.collectType = CollectType.Article.type
             }
@@ -55,6 +58,21 @@ class WebFragment : BaseFragment<WebViewModel, FragmentWebBinding>() {
             .useDefaultIndicator()
             .createAgentWeb()
             .ready()
+    }
+
+    override fun createObserver() {
+        super.createObserver()
+        mViewModel.collectState.observe(this){
+            if (it.isSuccess) {
+                mViewModel.collected = it.collected
+                eventViewModel.collectEvent.value = CollectEvent(it.id, it.collected)
+                //刷新一下menu
+                mActivity.window?.invalidatePanelMenu(Window.FEATURE_OPTIONS_PANEL)
+                mActivity.invalidateOptionsMenu()
+            } else {
+                activity?.showAlertDialog(it.errorMsg)
+            }
+        }
     }
 
     override fun lazyLoadData() {
@@ -95,19 +113,11 @@ class WebFragment : BaseFragment<WebViewModel, FragmentWebBinding>() {
             findNavController().navigate(R.id.action_to_loginFragment)
             return
         }
-//        if (mViewModel.collect) {
-//            if (mViewModel.collectType == CollectType.Url.type) {
-//                requestCollectViewModel.uncollectUrl(mViewModel.ariticleId)
-//            } else {
-//                requestCollectViewModel.uncollect(mViewModel.ariticleId)
-//            }
-//        } else {
-//            if (mViewModel.collectType == CollectType.Url.type) {
-//                requestCollectViewModel.collectUrl(mViewModel.showTitle, mViewModel.url)
-//            } else {
-//                requestCollectViewModel.collect(mViewModel.ariticleId)
-//            }
-//        }
+        if (mViewModel.collected) {
+            mViewModel.unCollect(mViewModel.articleId)
+        } else {
+            mViewModel.collect(mViewModel.articleId)
+        }
     }
 
     private fun openWeb() {
