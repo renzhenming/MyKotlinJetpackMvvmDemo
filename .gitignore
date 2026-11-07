@@ -45,4 +45,4 @@ google-services.json
 *.hprof
 
 *.bat
-gradlew
+# gradlew  # keep wrapper scripts in repo for CI/SOP
